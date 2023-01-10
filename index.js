@@ -10,6 +10,8 @@ app.use(bodyParser.json());
 
 app.use('/api/v1', router);
 
-app.get('/', (req, res) => res.send('Ok'));
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
 
 app.listen(5000, () => console.log('App running on port 5000'));

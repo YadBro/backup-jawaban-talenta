@@ -6,8 +6,17 @@ const router = Router();
 router.post('/backup', async (req, res) => {
   try {
     const body = req.body;
+    const kodePeserta = body.kodePeserta;
 
-    const data = await backup.create(body);
+    let data = await backup.findOne({
+      where: { kodePeserta },
+    });
+
+    if (data === null) {
+      data = await backup.create(body);
+    } else {
+      await backup.update(body, { where: { kodePeserta } });
+    }
 
     res.send({
       status: 'success',
